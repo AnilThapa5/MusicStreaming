@@ -63,13 +63,14 @@
                                  <li> <a href="album.html"> Albums</a> </li>
                                  <li> <a href="app/blog">Blog</a> </li>
 
-                                 {& if user.is_authenticated %}
+                                 {% if user.is_authenticated %}
                                  <li>Hello, {{user.first_name}}</li>
                                  <li><a href="accounts/Logout">Logout</a> </li>
-                                 {% else %}
+                                 {% load static %}
+                                  {% else %}
                                  <li> <a href="accounts/register">Register</a> </li>
                                  <li> <a href="accounts/login">Login</a> </li>
-                                 {% endif %}
+                                  {% endif %}
                              </ul>
                          </nav>
                      </div>
