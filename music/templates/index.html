@@ -20,6 +20,9 @@
     <link rel="stylesheet" href= '{% static  "css/style.css"  %}' type="text/css">
     <!-- Responsive-->
     <link rel="stylesheet" href='{% static "css/responsive.css"  %}' type="text/css">
+    <!-- music player-->
+    <link rel="stylesheet" href='{% static "css/mmplayer.css"  %}' type="text/css">
+
 
     <!-- Scrollbar Custom CSS -->
     <link rel="stylesheet" href='{% static "css/jquery.mCustomScrollbar.min.css"  %}'>
@@ -106,37 +109,41 @@
     <!-- music-box  -->
     <div class="music-box">
         <div class="container">
-            <div class="row">
-                <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
-                    <div class="for-box">
-                        <i><img src='{%static "icon/icon1.png" %}' alt="icon"/></i>
-                        <h3>Custom Player</h3>
-                        <p>Customize your playlist add songs to your list player </p>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
-                    <div class="for-box">
-                        <i><img src='{%static "icon/icon2.png" %}' alt="icon"/></i>
-                        <h3>Easy customize</h3>
-                        <p>t is a long established fact that a reader will be distracted by the readable </p>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
-                    <div class="for-box">
-                        <i><img src= '{%static "icon/icon3.png" %}' alt="icon"/></i>
-                        <h3>Music Playlist</h3>
-                        <p>Create Your Playlist make easy to listen </p>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
-                    <div class="for-box">
-                        <i><img src= '{%static "icon/icon4.png" %}'  alt="icon"/></i>
-                        <h3>Custom Gallery</h3>
-                        <p>Will have lots of available songs in gallery </p>
-                    </div>
-                </div>
-            </div>
-        </div>
+  <h1>Music Player</h1>
+  <p class="lead">A simple music player that uses Media Session API to enhance the media playback experience. Music courtesy - <a href="https://www.bensound.com/">Bensound</a>.</p>
+  <h3>Playlist</h3>
+  <div class="player">
+    <!-- Inject player here... -->
+  </div>
+
+  <div class="media-controls pb-4">
+    <!-- Progress bar -->
+    <div class="progress bg-success"></div>
+    <div class="playback-controls text-center">
+      <button id="previousButton" type="button" class="btn btn-sm rounded-circle">
+        <span aria-hidden="true"><i class="fas fa-step-backward"></i></span>
+        <span class="visually-hidden">Previous Track</span>
+      </button>
+      <button id="backwardButton" type="button" class="btn btn-sm rounded-circle">
+        <span aria-hidden="true"><i class="fas fa-backward"></i></span>
+        <span class="visually-hidden">Seek Backward</span>
+      </button>
+      <button id="playPauseButton" type="button" class="btn btn-lg rounded-circle">
+        <span aria-hidden="true"><i class="fas fa-play"></i></span>
+        <span class="visually-hidden">Play</span>
+      </button>
+      <button id="forwardButton" type="button" class="btn btn-sm rounded-circle">
+        <span aria-hidden="true"><i class="fas fa-forward"></i></span>
+        <span class="visually-hidden">Seek Forward</span>
+      </button>
+      <button id="nextButton" type="button" class="btn btn-sm rounded-circle">
+        <span aria-hidden="true"><i class="fas fa-step-forward"></i></span>
+        <span class="visually-hidden">Next Track</span>
+      </button>
+    </div>
+  </div>
+
+
     </div>
     <!-- end music-box  -->
 
@@ -347,6 +354,9 @@
     <script src='{%static "js/popper.min.js" %}' ></script>
     <script src='{%static "js/bootstrap.bundle.min.js" %}' ></script>
     <script src='{%static "js/jquery-3.0.0.min.js" %}' ></script>
+    <script src='{%static "js/musicplayer.js" %}' ></script>
+
+
     <!-- sidebar -->
     <script src='{%static "js/jquery.mCustomScrollbar.concat.min.js" %}' ></script>
 
