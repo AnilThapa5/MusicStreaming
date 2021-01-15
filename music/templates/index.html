@@ -23,6 +23,8 @@
     <!-- music player-->
     <link href='{% static "css/mmplayer.css"  %}' rel="stylesheet" type="text/css">
     <link href='{% static "css/jquery.mCustomScrollbar.min.css"  %}' rel="stylesheet">
+    <link href='{% static "css/rating.css"  %}' rel="stylesheet">
+
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <!-- Scrollbar Custom CSS -->
@@ -39,9 +41,44 @@
     <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
           integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" rel="stylesheet">
 
-    <!-- CSS BRGIN -->
+    <!-- rating system link -->
+    <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
 
-    <--! CSS END HERE -->
+    <script src="jquery.rating.js"></script>
+    <style>
+
+/* Rating Star Widgets Style */
+.rating-stars ul {
+  list-style-type:none;
+  padding:0;
+
+  -moz-user-select:none;
+  -webkit-user-select:none;
+}
+.rating-stars ul > li.star {
+  display:inline-block;
+
+}
+
+/* Idle State of the stars */
+.rating-stars ul > li.star > i.fa {
+  font-size:2.5em; /* Change the size of the stars */
+  color:#ccc; /* Color on idle state */
+}
+
+/* Hover state of the stars */
+.rating-stars ul > li.star.hover > i.fa {
+  color:#FFCC36;
+}
+
+/* Selected state of the stars */
+.rating-stars ul > li.star.selected > i.fa {
+  color:#FF912C;
+}
+
+
+    </style>
+
 </head>
 <!-- body -->
 
@@ -69,27 +106,37 @@
                     <div class="limit-box">
                         <nav class="main-menu">
                             <ul class="menu-area-main">
-                                <li class="active"><a href="index.html">Home</a></li>
+                                <li class="active"><a href="/app/index">Home</a></li>
                                 <li><a href="about.html">about</a></li>
-                                <li><a href="album.html"> Albums</a></li>
-                                <li><a href="app/blog">Blog</a></li>
+                                <!-- <li><a href="album.html"> Albums</a></li>-->
+                                <li><a href="/app/blog">Blog</a></li>
 
                                 {% if user.is_authenticated %}
                                 <li>Hello, {{user.first_name}}</li>
-                                <li><a href="accounts/Logout">Logout</a></li>
+                                <li>
+                                    <span class="opener">Your Profile</span>
+                                    <ul>
+                                        <li><a href="/view_profile">View Profile</a></li>
+                                        <li><a href="/edit_profile">Update Profile</a></li>
+                                        <li><a href="/change_password">Change Password</a></li>
+                                        <li><a href="/logout">Logout</a></li>
+                                    </ul>
+                                </li>
                                 {% load static %}
                                 {% else %}
-                                <li><a href="accounts/register">Register</a></li>
-                                <li><a href="accounts/login">Login</a></li>
+                                <li><a href="/register">Register</a></li>
+                                <li><a href="/">Login</a></li>
                                 {% endif %}
+                                <li><a href="/contactview">Contact Us</a></li>
                             </ul>
                         </nav>
                     </div>
                 </div>
             </div>
             <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2">
-                <form class="search">
-                    <input class="form-control" placeholder="Search" type="text">
+                <form method="get" action="/search">
+                    {% csrf_token %}
+                    <input type="text" name="query" id="query" placeholder="Search"/>
                     <button><img src='{%static "images/search_icon.png" %}'></button>
                 </form>
             </div>
@@ -110,7 +157,7 @@
                                 <h1>Mp3<br><span class="Perfect">The Perfect Partner</span><br>Welcome To The Music</h1>
                                 <p>Be the music lover and enjoy the music
                                     <br> Create them listen them</p>
-                                <a href="#">Download Now</a>
+                                <!-- <a href="#">Download Now</a> -->
                             </div>
 
                         </div>
@@ -121,179 +168,257 @@
             <!-- music playing begin -->>
 
             <div class="grid-container">
-    {% for i in song1 %}
-<div class="item3">
-    <P>{{i.desc}}</P>
-    <div class="song-artist"><h4>Artist :</h4>{{i.artist}}</div>
-    <div class="song-title"><h4>Title :</h4>{{i.title}}</div>
-<audio controls>
-  <source src="media/{{i.songs}}"  type="audio/mp3">
-</audio>
-<div class="audio-player">
+                {% for i in song1 %}
+                <div class="col-md-4" style="background-color: #09c3ed">  <!--item3 -->
 
-  <div class="controls">
-    <div class="play-container">
-      <div class="toggle-play play">
-    </div>
-    </div>
+                    <div class="song-artist"><h5>Artist :{{i.artist}}</h5></div>
+                    <div class="song-title"><h5>Title :{{i.title}}</h5></div>
+                    <P><h5> Description :{{i.desc}}</h5></P>
+                    <audio controls>
+                        <source src="media/{{i.songs}}" type="audio/mp3">
+                    </audio>
+                    <div class="audio-player">
 
-<!--     credit for icon to https://saeedalipoor.github.io/icono/ -->
-    <div class="volume-container">
-      <div class="volume-button">
-        <div class="volume icono-volumeMedium"></div>
-      </div>
-
-      <div class="volume-slider">
-        <div class="volume-percentage"></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-</div>
-
-      <div class="item4"><img src={{i.img.url}} width="450"/></div>
-    {% endfor %}
-
-<!-- end music playing -->
-
-    <!-- Newsletter -->
-    <div class="Newsletter">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-
-                    <h2>Newsletter</h2>
-                    <div class="row">
-                        <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9 padding-right">
-                            <input class="email" name="Enter Your Email" placeholder="Enter Your Email" type="text">
-                        </div>
-                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 padding-left">
-                            <button class="submit-btn">Subscribe</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- end Newsletter -->
-
-    <!--  footer -->
-    <footr id="footer_with_contact">
-        <div class="footer">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-3 col-md-6 col-sm-12 width">
-                        <div class="address">
-                            <h3>Contact Us</h3>
-                            <ul class="locarion_icon">
-                                <li><img alt="icon" src='{%static "icon/1.png" %}'/>104 New York , USA</li>
-                                <li><img alt="icon" src='{%static "icon/2.png" %}'/>Phone : ( +71 5896547 )</li>
-                                <li><img alt="icon" src='{%static "icon/3.png" %}'/>Email : demo@email.com</li>
-
-                            </ul>
-
-                            <ul class="contant_icon">
-                                <li><img alt="icon" src='{%static "icon/fb.png" %}'/></li>
-                                <li><img alt="icon" src='{%static "icon/tw.png" %}'/></li>
-                                <li><img alt="icon" src='{%static "icon/lin(2).png" %}'/></li>
-                                <li><img alt="icon" src='{%static "icon/instagram.png"  %}'/></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-12 width">
-                        <div class="address">
-                            <h3>Get In Touch</h3>
-                            <form>
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <input class="contactus" name="Name" placeholder="Name" type="text">
-                                    </div>
-                                    <div class="col-sm-12">
-                                        <input class="contactus" name="Email" placeholder="Phone" type="text">
-                                    </div>
-                                    <div class="col-sm-12">
-                                        <input class="contactus" name="Email" placeholder="Email" type="text">
-                                    </div>
-                                    <div class="col-sm-12">
-                                        <textarea class="textarea" name="Message" placeholder="Message"
-                                                  type="text"></textarea>
-                                    </div>
-                                    <div class="col-sm-12">
-                                        <button class="send">Send</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 width">
-                        <div class="address">
-                            <h3>New Music </h3>
-                            <div class="row">
-                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 ">
-                                    <figure><img src='{%static "images/music1.jpg" %}'/></figure>
-                                </div>
-                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 ">
-                                    <figure><img src='{%static "images/music2.jpg"%}'/></figure>
-                                </div>
-                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 ">
-                                    <figure><img src='{%static "images/music3.jpg"  %}'/></figure>
-                                </div>
-                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 ">
-                                    <figure><img src='{%static "images/music4.jpg"%}'/></figure>
+                        <div class="controls">
+                            <div class="play-container">
+                                <div class="toggle-play play">
                                 </div>
                             </div>
 
+                            <!--     credit for icon to https://saeedalipoor.github.io/icono/ -->
+                            <div class="volume-container">
+                                <div class="volume-button">
+                                    <div class="volume icono-volumeMedium"></div>
+                                </div>
+
+                                <div class="volume-slider">
+                                    <div class="volume-percentage"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="col-md-4"><img src={{i.img.url}} style="Height:210px" width="300px"/></div>
+                <!--rating begin here-->
+
+                <div id="rate" class="col-md-4" style="height:210px" width="300px">
+
+                    <section class='rating-widget'>
+
+                        <!-- Rating Stars Box -->
+                        <div class='rating-stars text-center'>
+                            <ul id='stars'>
+                                <li class='star' title='Poor' data-value='1'>
+                                    <i class='fa fa-star fa-fw'></i>
+                                </li>
+                                <li class='star' title='Fair' data-value='2'>
+                                    <i class='fa fa-star fa-fw'></i>
+                                </li>
+                                <li class='star' title='Good' data-value='3'>
+                                    <i class='fa fa-star fa-fw'></i>
+                                </li>
+                                <li class='star' title='Excellent' data-value='4'>
+                                    <i class='fa fa-star fa-fw'></i>
+                                </li>
+                                <li class='star' title='WOW!!!' data-value='5'>
+                                    <i class='fa fa-star fa-fw'></i>
+                                </li>
+                            </ul>
+                        </div>
+                    </section>
+                </div>
+
+                <!-- rating end here   -->
+
+
+                {% endfor %}
+
+
+                <!-- end music playing -->
+
+                <!-- Newsletter -->
+                <div class="Newsletter">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+
+                                <h2>Newsletter</h2>
+                                <div class="row">
+                                    <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9 padding-right">
+                                        <input class="email" name="Enter Your Email" placeholder="Enter Your Email"
+                                               type="text">
+                                    </div>
+                                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 padding-left">
+                                        <button class="submit-btn">Subscribe</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="copyright">
-                <p>© 2019 All Rights Reserved. <a href="https://html.design/">Free html Templates</a></p>
-            </div>
-        </div>
 
-    </footr>
-    <!-- end footer -->
-    <!--     Javascript files-->
+                <!-- end Newsletter -->
 
-    <script src="{% static 'js/jquery.min.js' %}"></script>
-    <script src='{%static "js/popper.min.js" %}'></script>
-    <script src='{%static "js/bootstrap.bundle.min.js" %}'></script>
-    <script src='{%static "js/jquery-3.0.0.min.js" %}'></script>
-    <script src='{%static "js/musicplayer.js" %}'></script>
+                <!--  footer -->
+                <footr id="footer_with_contact">
+                    <div class="footer">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-6 col-sm-12 width">
+                                    <div class="address">
+                                        <h3>Contact Us</h3>
+                                        <ul class="locarion_icon">
+                                            <li><img alt="icon" src='{%static "icon/1.png" %}'/>104 New York , USA</li>
+                                            <li><img alt="icon" src='{%static "icon/2.png" %}'/>Phone : ( +71 5896547 )
+                                            </li>
+                                            <li><img alt="icon" src='{%static "icon/3.png" %}'/>Email : demo@email.com
+                                            </li>
+
+                                        </ul>
+
+                                        <ul class="contant_icon">
+                                            <li><img alt="icon" src='{%static "icon/fb.png" %}'/></li>
+                                            <li><img alt="icon" src='{%static "icon/tw.png" %}'/></li>
+                                            <li><img alt="icon" src='{%static "icon/lin(2).png" %}'/></li>
+                                            <li><img alt="icon" src='{%static "icon/instagram.png"  %}'/></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12 width">
+                                    <div class="address">
+                                        <h3>Get In Touch</h3>
+                                        <form>
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <input class="contactus" name="Name" placeholder="Name" type="text">
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <input class="contactus" name="Email" placeholder="Phone"
+                                                           type="text">
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <input class="contactus" name="Email" placeholder="Email"
+                                                           type="text">
+                                                </div>
+                                                <div class="col-sm-12">
+                                        <textarea class="textarea" name="Message" placeholder="Message"
+                                                  type="text"></textarea>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <button class="send">Send</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 width">
+                                    <div class="address">
+                                        <h3>New Music </h3>
+                                        <div class="row">
+                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 ">
+                                                <figure><img src='{%static "images/music1.jpg" %}'/></figure>
+                                            </div>
+                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 ">
+                                                <figure><img src='{%static "images/music2.jpg"%}'/></figure>
+                                            </div>
+                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 ">
+                                                <figure><img src='{%static "images/music3.jpg"  %}'/></figure>
+                                            </div>
+                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 ">
+                                                <figure><img src='{%static "images/music4.jpg"%}'/></figure>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="copyright">
+                            <p>© 2021 All Rights Reserved.
+                            <p>Anil Thapa</p>
+                        </div>
+                    </div>
+
+                </footr>
+                <!-- end footer -->
+                <!--     Javascript files-->
+
+                <script src="{% static 'js/jquery.min.js' %}"></script>
+                <script src='{%static "js/popper.min.js" %}'></script>
+                <script src='{%static "js/bootstrap.bundle.min.js" %}'></script>
+                <script src='{%static "js/jquery-3.0.0.min.js" %}'></script>
+                <script src='{%static "js/musicplayer.js" %}'></script>
 
 
-    <!-- sidebar -->
-    <script src='{%static "js/jquery.mCustomScrollbar.concat.min.js" %}'></script>
+                <!-- sidebar -->
+                <script src='{%static "js/jquery.mCustomScrollbar.concat.min.js" %}'></script>
 
-    <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $(".fancybox").fancybox({
-                openEffect: "none",
-                closeEffect: "none"
-            });
+                <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+                <script>
+$(document).ready(function(){
 
-            $(".zoom").hover(function() {
+  /* 1. Visualizing things on Hover - See next part for action on click */
+  $('#stars li').on('mouseover', function(){
+    var onStar = parseInt($(this).data('value'), 10); // The star currently mouse on
 
-                $(this).addClass('transition');
-            }, function() {
+    // Now highlight all the stars that's not after the current hovered star
+    $(this).parent().children('li.star').each(function(e){
+      if (e < onStar) {
+        $(this).addClass('hover');
+      }
+      else {
+        $(this).removeClass('hover');
+      }
+    });
 
-                $(this).removeClass('transition');
-            });
-        });
+  }).on('mouseout', function(){
+    $(this).parent().children('li.star').each(function(e){
+      $(this).removeClass('hover');
+    });
+  });
 
 
+  /* 2. Action to perform on click */
+  $('#stars li').on('click', function(){
+    var onStar = parseInt($(this).data('value'), 10); // The star currently selected
+    var stars = $(this).parent().children('li.star');
+
+    for (i = 0; i < stars.length; i++) {
+      $(stars[i]).removeClass('selected');
+    }
+
+    for (i = 0; i < onStar; i++) {
+      $(stars[i]).addClass('selected');
+    }
+
+    // JUST RESPONSE (Not needed)
+    var ratingValue = parseInt($('#stars li.selected').last().data('value'), 10);
+    var msg = "";
+    if (ratingValue > 1) {
+        msg = "Thanks! You rated this " + ratingValue + " stars.";
+    }
+    else {
+        msg = "We will improve ourselves. You rated this " + ratingValue + " stars.";
+    }
+    responseMessage(msg);
+
+  });
 
 
+});
 
 
+function responseMessage(msg) {
+  $('.success-box').fadeIn(200);
+  $('.success-box div.text-message').html("<span>" + msg + "</span>");
+}
 
 
-    </script>
+ </script>
+
 </body>
 
 </html>

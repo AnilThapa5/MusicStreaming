@@ -1,7 +1,7 @@
 // Insperation: https://dribbble.com/shots/1962035-Freebie-Music-Player-Dark-Version
 
 body {
-   background-color: #EDEDED;
+   background-color: red;
 }
 
 $player-height: 190px;
@@ -42,7 +42,7 @@ h2 {
 .player {
    height: $player-height;
    width: $player-width;
-   background-color: #1E2125;
+   background-color:#1E2125;
    position: absolute;
    @include unselectable();
    top: 50%;
