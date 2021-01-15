@@ -1,0 +1,19 @@
+{% load crispy_forms_tags %}
+<form class="signup-form" method="POST">
+  <div class="form-header">
+    <h1>Edit Account</h1>
+  </div>
+  <div class="form-body">
+   <div class="horizontal-group">
+    <div class="form-group">
+    <!-- form body -->
+        {% csrf_token %}
+        {{ form|crispy }}
+    <!--  {{ form.as_p }}-->
+    </div>
+  </div>
+</div>
+  <div class="form-footer">
+    <button type="submit" class="btn">Update</button>
+  </div>
+</form>

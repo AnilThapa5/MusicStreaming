@@ -1,0 +1,19 @@
+{% load crispy_forms_tags %}
+<center><form class="signup-form" method="POST" style="background: gray">
+    <div class="form-header">
+        <h1>Profile</h1>
+    </div>
+    <div class="form-body">
+        <div class="horizontal-group">
+            <div class="form-group">
+                <p>Username: {{ user }}</p>
+                <p>First name: {{ user.first_name }}</p>
+                <p>Last name: {{ user.last_name }}</p>
+                <p>Email: {{ user.email }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="form-footer">
+    <a href="del_user" class="btn btn-danger" type="submit">Delete Account</a></div>
+</form>
+</center>

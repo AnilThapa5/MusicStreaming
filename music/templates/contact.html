@@ -1,0 +1,17 @@
+{% load crispy_forms_tags %}
+<form class="signup-form" method="POST">
+    <div class="form-header">
+        <h1>Contact Us</h1>
+    </div>
+    <div class="form-body">
+        <div class="horizontal-group">
+            <div class="form-group">
+                {% csrf_token %}
+                {{ form|crispy }}
+            </div>
+        </div>
+    </div>
+    <div class="form-footer">
+        <button type="submit" class="btn">Send</button>
+    </div>
+</form>
