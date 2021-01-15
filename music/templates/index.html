@@ -47,6 +47,8 @@
     <script src="jquery.rating.js"></script>
     <style>
 
+
+
 /* Rating Star Widgets Style */
 .rating-stars ul {
   list-style-type:none;
@@ -107,14 +109,16 @@
                         <nav class="main-menu">
                             <ul class="menu-area-main">
                                 <li class="active"><a href="/app/index">Home</a></li>
+<!--
                                 <li><a href="about.html">about</a></li>
+-->
                                 <!-- <li><a href="album.html"> Albums</a></li>-->
                                 <li><a href="/app/blog">Blog</a></li>
 
                                 {% if user.is_authenticated %}
                                 <li>Hello, {{user.first_name}}</li>
                                 <li>
-                                    <span class="opener">Your Profile</span>
+                                    <span class="opener" style="background-color:gray">Your Profile</span>
                                     <ul>
                                         <li><a href="/view_profile">View Profile</a></li>
                                         <li><a href="/edit_profile">Update Profile</a></li>
@@ -165,49 +169,59 @@
                 </section>
             </div>
 
-            <!-- music playing begin -->>
+            <!-- music playing begin -->
 
-            <div class="grid-container">
+            <div class="grid-container" >
+            <center><h2>Music Lists</h2></center>
                 {% for i in song1 %}
-                <div class="col-md-4" style="background-color: #09c3ed">  <!--item3 -->
-
+                <div class="col-md-4" style="background-color: #09c3ed" >  <!--item3 -->
                     <div class="song-artist"><h5>Artist :{{i.artist}}</h5></div>
                     <div class="song-title"><h5>Title :{{i.title}}</h5></div>
                     <P><h5> Description :{{i.desc}}</h5></P>
                     <audio controls>
                         <source src="media/{{i.songs}}" type="audio/mp3">
                     </audio>
+
+
                     <div class="audio-player">
 
-                        <div class="controls">
-                            <div class="play-container">
-                                <div class="toggle-play play">
-                                </div>
-                            </div>
+  <div class="controls">
+    <div class="play-container">
+      <div class="toggle-play play">
+    </div>
+    </div>
 
-                            <!--     credit for icon to https://saeedalipoor.github.io/icono/ -->
-                            <div class="volume-container">
-                                <div class="volume-button">
-                                    <div class="volume icono-volumeMedium"></div>
-                                </div>
+<!--     credit for icon to https://saeedalipoor.github.io/icono/ -->
+    <div class="volume-container">
+      <div class="volume-button">
+        <div class="volume icono-volumeMedium"></div>
+      </div>
 
-                                <div class="volume-slider">
-                                    <div class="volume-percentage"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+      <div class="volume-slider">
+        <div class="volume-percentage"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
 
 
                 </div>
 
-                <div class="col-md-4"><img src={{i.img.url}} style="Height:210px" width="300px"/></div>
+                <div class="col-md-4"><img src={{i.img.url}} style="Height:193px" width="350px"/></div>
                 <!--rating begin here-->
+
+
 
                 <div id="rate" class="col-md-4" style="height:210px" width="300px">
 
                     <section class='rating-widget'>
 
+
+
+                        <p>Rate this music</p>
                         <!-- Rating Stars Box -->
                         <div class='rating-stars text-center'>
                             <ul id='stars'>
@@ -231,36 +245,13 @@
                     </section>
                 </div>
 
+
+
                 <!-- rating end here   -->
-
-
                 {% endfor %}
 
 
                 <!-- end music playing -->
-
-                <!-- Newsletter -->
-                <div class="Newsletter">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-12">
-
-                                <h2>Newsletter</h2>
-                                <div class="row">
-                                    <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9 padding-right">
-                                        <input class="email" name="Enter Your Email" placeholder="Enter Your Email"
-                                               type="text">
-                                    </div>
-                                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 padding-left">
-                                        <button class="submit-btn">Subscribe</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- end Newsletter -->
 
                 <!--  footer -->
                 <footr id="footer_with_contact">
@@ -271,8 +262,8 @@
                                     <div class="address">
                                         <h3>Contact Us</h3>
                                         <ul class="locarion_icon">
-                                            <li><img alt="icon" src='{%static "icon/1.png" %}'/>104 New York , USA</li>
-                                            <li><img alt="icon" src='{%static "icon/2.png" %}'/>Phone : ( +71 5896547 )
+                                            <li><img alt="icon" src='{%static "icon/1.png" %}'/>Kathmandu , Nepal</li>
+                                            <li><img alt="icon" src='{%static "icon/2.png" %}'/>Phone : ( +71 58012547 )
                                             </li>
                                             <li><img alt="icon" src='{%static "icon/3.png" %}'/>Email : demo@email.com
                                             </li>
@@ -280,15 +271,15 @@
                                         </ul>
 
                                         <ul class="contant_icon">
-                                            <li><img alt="icon" src='{%static "icon/fb.png" %}'/></li>
-                                            <li><img alt="icon" src='{%static "icon/tw.png" %}'/></li>
-                                            <li><img alt="icon" src='{%static "icon/lin(2).png" %}'/></li>
-                                            <li><img alt="icon" src='{%static "icon/instagram.png"  %}'/></li>
+                                            <li><a href="https://www.facebook.com/"><img alt="icon" src='{%static "icon/fb.png" %}'/></a></li>
+                                            <li><a href="https://twitter.com/"><img alt="icon" src='{%static "icon/tw.png" %}'/></a></li>
+                                            <li><a href="https://pinterest.com/"><img alt="icon" src='{%static "icon/pin.png" %}'/></a></li>
+                                            <li><a href="https://instagram.com/"><img alt="icon" src='{%static "icon/instagram.png"  %}'/></a></li>
                                         </ul>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-12 width">
-                                    <div class="address">
+                                    <!--<div class="address">
                                         <h3>Get In Touch</h3>
                                         <form>
                                             <div class="row">
@@ -312,7 +303,7 @@
                                                 </div>
                                             </div>
                                         </form>
-                                    </div>
+                                    </div>-->
                                 </div>
                                 <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 width">
                                     <div class="address">
@@ -350,7 +341,7 @@
                 <script src='{%static "js/popper.min.js" %}'></script>
                 <script src='{%static "js/bootstrap.bundle.min.js" %}'></script>
                 <script src='{%static "js/jquery-3.0.0.min.js" %}'></script>
-                <script src='{%static "js/musicplayer.js" %}'></script>
+
 
 
                 <!-- sidebar -->
@@ -416,6 +407,21 @@ function responseMessage(msg) {
   $('.success-box div.text-message').html("<span>" + msg + "</span>");
 }
 
+
+    $(document).ready(function() {
+            $(".fancybox").fancybox({
+                openEffect: "none",
+                closeEffect: "none"
+            });
+
+            $(".zoom").hover(function() {
+
+                $(this).addClass('transition');
+            }, function() {
+
+                $(this).removeClass('transition');
+            });
+        });
 
  </script>
 

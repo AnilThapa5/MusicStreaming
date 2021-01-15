@@ -34,10 +34,12 @@
 <body>
 <div class="page-wrapper bg-gra-01 p-t-180 p-b-100 font-poppins">
     <div class="wrapper wrapper--w780">
-        <div class="card card-3">
+        <div class="card card-3" style="background:gray">
             <div class="card-heading"></div>
-            <div class="card-body">
-                <h2 class="title">Registration Info</h2>
+            <div class="card-body" style="margin-left:500px">
+               <h2>Welcome to Music streaming Website</h2>
+
+                <h2 class="title" style="font-style:bold">Registration Info</h2>
                 <form class="signup-form" action="register" method="POST">
                     {% csrf_token %}
                     <div>
@@ -46,23 +48,23 @@
                         {% endfor %}
                     </div>
                     <div class="input-group">
-                        <input class="input--style-3" type="text" placeholder="First Name" name="first_name" required/>
+                      First Name:<br><input class="input--style-3" type="text" placeholder="First Name" name="first_name" required/>
                     </div>
                     <div class="input-group">
-                        <input class="input--style-3" type="text" placeholder="Last Name" name="last_name" required/>
+                        Last Name:<br><input class="input--style-3" type="text" placeholder="Last Name" name="last_name" required/>
                     </div>
                     <div class="input-group">
-                        <input class="input--style-3" type="email" placeholder="Email" name="email" required/>
+                        Email:<br><input class="input--style-3" type="email" placeholder="Email" name="email" required/>
                     </div>
                     <div class="input-group">
-                        <input class="input--style-3" type="text" placeholder="Username" name="username" required/>
+                        UserName:<br><input class="input--style-3" type="text" placeholder="Username" name="username" required/>
                     </div>
                     <div class="input-group">
-                        <input type="password" name="password" class="input--style-3" placeholder="Password" required="required"/>
+                        Password:<br><input type="password" name="password" class="input--style-3" placeholder="Password" required="required"/>
                     </div>
 
                     <div class="input-group">
-                        <input class="input--style-3" type="password" placeholder="Confirm Password"
+                        Conform Password:<br>   <input class="input--style-3" type="password" placeholder="Confirm Password"
                                name="confirm-password" required/>
                     </div>
                     <div class="p-t-10">
